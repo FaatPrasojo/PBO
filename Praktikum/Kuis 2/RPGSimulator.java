@@ -165,7 +165,7 @@ public class RPGSimulator extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JPanel btnContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton btnSimulasi = new JButton("Jalankan Simulasi (Loop)");
+        JButton btnSimulasi = new JButton("Jalankan Simulasi");
         btnSimulasi.setFont(new Font("Arial", Font.BOLD, 14));
         btnSimulasi.setPreferredSize(new Dimension(220, 40));
         btnSimulasi.addActionListener(e -> actionRunSimulation());
