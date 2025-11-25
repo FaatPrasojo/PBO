@@ -42,14 +42,14 @@ public class RPGSimulator extends JFrame {
         statusPanel.add(new JLabel("Nama Hero"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 0.7;
-        txtHeroName = new JTextField("Makima");
+        txtHeroName = new JTextField("Prasojo");
         statusPanel.add(txtHeroName, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         statusPanel.add(new JLabel("Level"), gbc);
         gbc.gridx = 1;
-        txtHeroLevel = new JTextField("99");
+        txtHeroLevel = new JTextField("10");
         statusPanel.add(txtHeroLevel, gbc);
 
         gbc.gridx = 0;
@@ -74,7 +74,7 @@ public class RPGSimulator extends JFrame {
         skillPanel.add(new JLabel("Nama Skill"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 0.7;
-        txtSkillName = new JTextField("Judgement Hammer");
+        txtSkillName = new JTextField("Explosion");
         skillPanel.add(txtSkillName, gbc);
 
         gbc.gridx = 0;
@@ -119,7 +119,7 @@ public class RPGSimulator extends JFrame {
         statusPanel.add(new JLabel("Nama Enemy:"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
-        txtEnemyName = new JTextField("Drake");
+        txtEnemyName = new JTextField("Toothless");
         statusPanel.add(txtEnemyName, gbc);
 
         gbc.gridx = 0;
@@ -137,7 +137,7 @@ public class RPGSimulator extends JFrame {
         statusPanel.add(new JLabel("Attack Power (AP):"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
-        txtEnemyAP = new JTextField("25");
+        txtEnemyAP = new JTextField("40");
         statusPanel.add(txtEnemyAP, gbc);
 
         gbc.gridx = 0;
