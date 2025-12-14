@@ -1,0 +1,25 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.jar]
+@="jarfile"
+"Content Type"="application/java-archive"
+
+[HKEY_CLASSES_ROOT\jarfile]
+@="Java JAR File"
+"FriendlyTypeName"="Java JAR Archive"
+
+[HKEY_CLASSES_ROOT\jarfile\DefaultIcon]
+@="C:\\Program Files\\Java\\jdk-23\\bin\\java.exe,0"
+
+[HKEY_CLASSES_ROOT\jarfile\shell]
+
+[HKEY_CLASSES_ROOT\jarfile\shell\open]
+
+[HKEY_CLASSES_ROOT\jarfile\shell\open\command]
+@="javaw.exe -jar \"%1\" %%*"
+
+[HKEY_CLASSES_ROOT\jarfile\shell\Run with Java]
+@="Run with Java"
+
+[HKEY_CLASSES_ROOT\jarfile\shell\Run with Java\command]
+@="java.exe -jar \"%1\" %%*"

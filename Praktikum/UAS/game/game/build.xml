@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BattleSimulator" default="build" basedir=".">
+    <description>
+        RPG Battle Simulator - Ant Build File
+        Build with: ant clean build
+    </description>
+
+    <!-- Properties -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="main.class" value="BattleGameGUI"/>
+    <property name="jar.name" value="BattleSimulator.jar"/>
+
+    <!-- Classpath -->
+    <path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <!-- Initialize -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <echo message="Building ${ant.project.name}..."/>
+    </target>
+
+    <!-- Compile Java sources -->
+    <target name="compile" depends="init">
+        <echo message="Compiling Java source files..."/>
+        <javac srcdir="${src.dir}" 
+               destdir="${build.dir}"
+               classpathref="classpath"
+               debug="true"
+               includeAntRuntime="false">
+            <compilerarg value="-encoding"/>
+            <compilerarg value="UTF-8"/>
+        </javac>
+        <echo message="✓ Compilation complete"/>
+    </target>
+
+    <!-- Build JAR with embedded SQLite -->
+    <target name="build" depends="compile">
+        <echo message="Building executable JAR..."/>
+        
+        <!-- Copy SQLite driver classes to build dir -->
+        <unjar src="${lib.dir}/sqlite-jdbc-3.51.1.0.jar" dest="${build.dir}">
+            <patternset>
+                <include name="org/**"/>
+                <include name="META-INF/**"/>
+            </patternset>
+        </unjar>
+
+        <!-- Create JAR with manifest -->
+        <jar destfile="${dist.dir}/${jar.name}" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Created-By" value="Ant Build System"/>
+                <attribute name="Implementation-Version" value="1.0"/>
+            </manifest>
+        </jar>
+        
+        <echo message="✓ JAR created: ${dist.dir}/${jar.name}"/>
+        <echo message="✓ Size: " append="false"/>
+        <length file="${dist.dir}/${jar.name}" property="jar.size"/>
+        <echo message="${jar.size} bytes"/>
+    </target>
+
+    <!-- Clean build artifacts -->
+    <target name="clean">
+        <echo message="Cleaning build artifacts..."/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <echo message="✓ Cleanup complete"/>
+    </target>
+
+    <!-- Run the application -->
+    <target name="run" depends="build">
+        <echo message="Starting application..."/>
+        <java jar="${dist.dir}/${jar.name}" fork="true"/>
+    </target>
+
+    <!-- Full rebuild -->
+    <target name="rebuild" depends="clean,build">
+        <echo message=""/>
+        <echo message="========================================"/>
+        <echo message="✅ BUILD SUCCESSFUL"/>
+        <echo message="========================================"/>
+        <echo message="JAR file: ${dist.dir}/${jar.name}"/>
+        <echo message=""/>
+        <echo message="To run: java -jar ${dist.dir}/${jar.name}"/>
+        <echo message="        or: ant run"/>
+        <echo message=""/>
+    </target>
+
+</project>

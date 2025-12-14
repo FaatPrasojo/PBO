@@ -1,0 +1,43 @@
+Windows Registry Editor Version 5.00
+
+; Remove WinRAR association for .jar files
+[-HKEY_CLASSES_ROOT\.jar]
+
+; Create fresh JAR file association with Java
+[HKEY_CLASSES_ROOT\.jar]
+@="jarfile"
+"Content Type"="application/java-archive"
+"PerceivedType"="application"
+
+[HKEY_CLASSES_ROOT\jarfile]
+@="Java JAR File"
+"FriendlyTypeName"="Java JAR Archive"
+"NoOpen"=""
+
+[HKEY_CLASSES_ROOT\jarfile\DefaultIcon]
+@="C:\\Program Files\\Java\\jdk-23\\bin\\java.exe,0"
+
+; Remove WinRAR shell handler
+[HKEY_CLASSES_ROOT\jarfile\shell]
+@="open"
+
+; Set Java as default action
+[HKEY_CLASSES_ROOT\jarfile\shell\open]
+@="Run with Java"
+"MUIVerb"="Run"
+
+[HKEY_CLASSES_ROOT\jarfile\shell\open\command]
+@="javaw.exe -jar \"%1\" %%*"
+
+; Also add context menu option
+[HKEY_CLASSES_ROOT\jarfile\shell\RunWithJava]
+@="Run with &Java"
+
+[HKEY_CLASSES_ROOT\jarfile\shell\RunWithJava\command]
+@="java.exe -jar \"%1\" %%*"
+
+; Remove any existing WinRAR associations
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jar\UserChoice]
+
+; Ensure Java handles all jar operations
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jar\UserChoice]

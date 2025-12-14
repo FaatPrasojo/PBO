@@ -1,0 +1,49 @@
+Windows Registry Editor Version 5.00
+
+; ============================================
+; NUCLEAR OPTION: Remove ALL WinRAR .jar hooks
+; ============================================
+
+; Delete WinRAR .jar association
+[-HKEY_CLASSES_ROOT\.jar]
+
+; Delete jarfile association if WinRAR owns it
+[-HKEY_CLASSES_ROOT\jarfile]
+
+; Delete user choice cache for .jar (forces Windows to ask again)
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jar]
+
+; ============================================
+; Create FRESH Java association
+; ============================================
+
+[HKEY_CLASSES_ROOT\.jar]
+@="jarfile"
+"Content Type"="application/java-archive"
+"PerceivedType"="application"
+
+[HKEY_CLASSES_ROOT\jarfile]
+@="Java JAR File"
+"FriendlyTypeName"="Java Archive"
+
+[HKEY_CLASSES_ROOT\jarfile\DefaultIcon]
+@="javaw.exe,0"
+
+[HKEY_CLASSES_ROOT\jarfile\shell]
+@="open"
+
+[HKEY_CLASSES_ROOT\jarfile\shell\open]
+@="Open"
+
+[HKEY_CLASSES_ROOT\jarfile\shell\open\command]
+@="javaw.exe -jar \"%%1\" %%*"
+
+[HKEY_CLASSES_ROOT\jarfile\shell\run]
+@="Run"
+
+[HKEY_CLASSES_ROOT\jarfile\shell\run\command]
+@="javaw.exe -jar \"%%1\" %%*"
+
+; ============================================
+; IMPORTANT: Run this REG file as ADMINISTRATOR
+; ============================================
